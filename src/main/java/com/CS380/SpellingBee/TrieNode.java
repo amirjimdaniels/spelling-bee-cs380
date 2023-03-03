@@ -56,13 +56,15 @@ public class TrieNode {
 		this.word = word;
 		this.parent = parent;
 		
-		parent.setChild(this);
+		if (parent != null) {
+			parent.setChild(this);
+		}
 	}
 
 	/**
 	 * Constructor for root of Trie. Should only be used when constructing the Trie originally
 	 * <p>
-	 * This constructor will leave the parent value as <b>null</b>, and the char value as <b>\\u0000</b>
+	 * This constructor will leave the parent value as <b>null</b>, and the char value as <b>0</b>
 	 * as well as default layer to <b>0</b> and word to <b>false</b>
 	 * </p>
 	 */
@@ -87,21 +89,7 @@ public class TrieNode {
 		this.layer = parent.layer+1;
 	}
 	
-	/**
-	 * Returns the pathways as a list of nodes (for removing words/working within the list)
-	 * 
-	 * @return Pathway down to this node through the trie
-	 */
-	public TrieNode[] getPathway() {
-		ArrayList<TrieNode> pathway = new ArrayList<>();
-		TrieNode current = this;
-		while (current.layer > 0) {							// avoid grabbing the root node (we need that pristine)
-			pathway.add(current.getLayer() - 1, current);	// adds to the corresponding ArrayList location (0 indexed, so layer-1 since the smallest layer will be 1)
-			current = current.getParent();					// walk up the tree
-		}
-		
-		return pathway.toArray(new TrieNode[0]);		// convert to an array of type TrieNode
-	}
+	
 	
 	/**
 	 * Do it got a child with the charatcer already created?
@@ -159,7 +147,7 @@ public class TrieNode {
 	/**
 	 * gets the letter stored in this node.
 	 * 
-	 * will be <b>\u0000</b> if the node has no letter
+	 * will be <b>0</b> if the node has no letter
 	 * @return
 	 */
 	public char getLetter() {
@@ -200,16 +188,21 @@ public class TrieNode {
 	
 	/**
 	 * Sets the parent of the current node. Also, updates the layer to match
-	 * so we don't have to do that ourselves elsewhere
+	 * so we don't have to do that ourselves elsewhere. also, updates the children of the parent
+	 * 
+	 * Will fail if this has no letter associated with it
+	 * 
 	 * @param parent
 	 */
 	public void setParent(TrieNode parent) {
 		this.parent = parent;
 		this.layer = parent.getLayer() + 1;
+		
+
 	}
 	
 	/**
-	 * Sets the parent of the current node without setting the layer
+	 * Sets the parent of the current node without setting the layer or setting this as the parents child
 	 * @param parent
 	 */
 	public void setParentNoLayerUpdate(TrieNode parent) {

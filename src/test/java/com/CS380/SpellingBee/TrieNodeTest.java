@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class NodeTest {
+public class TrieNodeTest {
 	TrieNode tester = new TrieNode('a',true,null);
 	
 
