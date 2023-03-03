@@ -2,10 +2,16 @@ package com.CS380.SpellingBee;
 
 import static org.junit.Assert.*;
 
+import org.junit.Before;
 import org.junit.Test;
 
 public class TrieTest {
-	Trie tester = new Trie();
+	Trie tester;
+	
+	@Before
+	public void setUp() {
+		tester = new Trie();
+	}
 	
 	
 	@Test
