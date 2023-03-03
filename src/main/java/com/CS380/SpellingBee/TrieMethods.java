@@ -32,7 +32,7 @@ public interface TrieMethods {
 		 * @param currentNode
 		 * @return
 		 */
-		public boolean isWord(Node currentNode);
+		public boolean isWord(TrieNode currentNode);
 
 		/**
 		 * Keep tabs on how many words are in the trie
@@ -45,7 +45,7 @@ public interface TrieMethods {
 		 * @param cWord
 		 * @return
 		 */
-		public Node containsWord(String cWord);
+		public TrieNode containsWord(String cWord);
 
 		
 
