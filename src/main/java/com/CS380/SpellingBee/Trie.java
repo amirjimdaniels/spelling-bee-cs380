@@ -8,24 +8,37 @@ import java.util.Arrays;
 
 public class Trie implements TrieMethods {
 	/**
-	 * Root node of the tree, has a layer of 0 and a parent of null
+	 * Root node of the trie, has a layer of 0 and a parent of null
 	 */
-	Node root;
+	TrieNode root;
+	
 	/**
 	 * Variable to keep track to the number of words contained within the Trie
 	 */
 	int numWordsInTrie;
 
 	/**
-	 * Creates a new Trie with a blank root note with layer = 0
+	 * Constructor for a Trie
+	 * 
+	 * Creates a new Trie with a blank root note with layer = 0 using the corresponding TrieNode constructor
+	 * 
+	 * TODO: consider adding a layer of abstraction to the TrieNode() constructor using a method called 'constructRootNode' and making TrieNode() private
 	 */
 	public Trie () {
 		
-		root = new Node();
+		root = new TrieNode();
 		
 	}
 
 	
+	/**
+	 * Adds a word to the trie.
+	 * <p>
+	 * Creates nodes where nodes do not exist
+	 * </p>
+	 * 
+	 * <b>MAKE SURE THERE ARE NO CHARACTERS OUTSIDE OF 'a'-'z' BECUASE IT WILL BREAK</b>
+	 */
 	@Override
 	public boolean addWord(String input) {
 		/*
@@ -33,7 +46,9 @@ public class Trie implements TrieMethods {
 		 * iterates through creating nodes where ones do not already exists 
 		 * sets final node.word to true
 		 */
-		Node current = this.root;
+		TrieNode current = this.root;
+		
+		input = input.toLowerCase();
 		
 		char[] working= input.toCharArray();
 		
@@ -45,18 +60,21 @@ public class Trie implements TrieMethods {
 				
 			} else {
 				
-				current = current.setChild(new Node(working[i], false, current));
+				current = new TrieNode(working[i], false, current); 	// Child is automatically set in constructor as the child of current
 				
 			}
 		}
 		
-		current.setWord(true);
+		current.setWord(true);		// end of word!
 
 		numWordsInTrie++;
 		
 		return current.isWord();
 	}
 
+	/**
+	 * Add words from a list or a set
+	 */
 	@Override
 	public void addWords(String... wordsIn) {
 		for (String word: wordsIn) {
@@ -74,11 +92,13 @@ public class Trie implements TrieMethods {
 	@Override
 	public boolean removeWord(String rWord) {
 		
-		Node endOfWord = this.containsWord(rWord);	// use containedWord to get the lowest node in the word if it exists
+		TrieNode endOfWord = this.containsWord(rWord);	// use containedWord to get the lowest node in the word if it exists
 		
 		
 		if (endOfWord == null) return false; 		// if the word is not in the set, return
-		else endOfWord.word=false;
+		else endOfWord.word = false;
+		
+		numWordsInTrie--;
 		return true;
 		
 		
@@ -104,21 +124,31 @@ public class Trie implements TrieMethods {
 
 	/**
 	 * Checks if the given node is the end of a word
+	 * (is effectively a passthrough down to the node)
 	 */
 	@Override
-	public boolean isWord(Node currentNode) {
+	public boolean isWord(TrieNode currentNode) {
 		return currentNode.isWord();
 	}
 
+	/**
+	 * Return the current number of words stored in the trie
+	 */
 	@Override
 	public int numWordsContained() {
 		return numWordsInTrie;
 	}
 
+	/**
+	 * Returns the node if the word is in the trie, returns null if it is not
+	 */
 	@Override
-	public Node containsWord(String cWord) {
+	public TrieNode containsWord(String cWord) {
+		if (numWordsInTrie <= 0) {
+			return null;
+		}
 		
-		Node current = root;
+		TrieNode current = root;
 		int i = 0;
 		char[] wordArray = cWord.toCharArray();
 		

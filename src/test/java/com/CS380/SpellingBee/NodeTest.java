@@ -5,12 +5,12 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 public class NodeTest {
-	Node tester = new Node('a',true,null);
+	TrieNode tester = new TrieNode('a',true,null);
 	
 
 	@Test
 	public void testNodeCharBooleanNode() {
-		Node tester = new Node('a',true,null);
+		TrieNode tester = new TrieNode('a',true,null);
 		assertNotNull(tester);
 		assertEquals(tester.letter, 'a');
 		assertEquals(tester.word,true);
@@ -19,7 +19,7 @@ public class NodeTest {
 
 	@Test
 	public void testNode() {
-		Node node = new Node();
+		TrieNode node = new TrieNode();
 		assertNotNull(node);
 		assertEquals(node.getLayer(), 0);
 
@@ -29,7 +29,7 @@ public class NodeTest {
 
 	@Test
 	public void testNodeNode() {
-		Node branch= new Node(tester);
+		TrieNode branch= new TrieNode(tester);
 		assertEquals(branch.layer, 1);
 		assertTrue(branch.parent.equals(tester));
 	}
