@@ -85,7 +85,7 @@ public class Trie implements TrieMethods {
 	}
 
 	/**
-	 * Assumes the input stream contains words seperated by a newline character
+	 * Assumes the input stream contains words separated by a newline character
 	 * @param inStream ReaderStream
 	 * @throws IOException 
 	 */
