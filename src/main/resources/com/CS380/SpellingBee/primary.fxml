@@ -1,11 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.CS380.SpellingBee.PrimaryController">
    <children>
-      <Button fx:id="myButton" layoutX="235.0" layoutY="157.0" mnemonicParsing="false" prefHeight="87.0" prefWidth="131.0" text="Hi there" />
+      <ListView fx:id="listView" layoutX="371.0" layoutY="64.0" prefHeight="262.0" prefWidth="200.0" />
+      <TextField fx:id="textField" layoutX="391.0" layoutY="29.0" />
+      <Button fx:id="buttonTop" layoutX="107.0" layoutY="64.0" mnemonicParsing="false" text="Button" />
+      <Button fx:id="buttonMiddleLeft" layoutX="52.0" layoutY="90.0" mnemonicParsing="false" text="Button" />
+      <Button fx:id="buttonMiddleMiddle" layoutX="107.0" layoutY="91.0" mnemonicParsing="false" text="Button" />
+      <Button fx:id="buttonMiddleRight" layoutX="161.0" layoutY="91.0" mnemonicParsing="false" text="Button" />
+      <Button fx:id="buttonBottomLeft" layoutX="72.0" layoutY="117.0" mnemonicParsing="false" text="Button" />
+      <Button fx:id="buttonBottomRight" layoutX="126.0" layoutY="118.0" mnemonicParsing="false" text="Button" />
+      <Button fx:id="enter" layoutX="52.0" layoutY="200.0" mnemonicParsing="false" text="Enter" />
+      <Button fx:id="shuffle" layoutX="114.0" layoutY="201.0" mnemonicParsing="false" text="Shuffle" />
+      <Button fx:id="delete" layoutX="180.0" layoutY="201.0" mnemonicParsing="false" text="Delete" />
+      <Label fx:id="myLabel" layoutX="1.0" layoutY="34.0" prefHeight="17.0" prefWidth="303.0" text="Word" />
    </children>
 </AnchorPane>
