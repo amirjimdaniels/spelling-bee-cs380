@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 public class NodeTest {
-
+	Node tester = new Node('a',true,null);
 	
 
 	@Test
@@ -29,7 +29,9 @@ public class NodeTest {
 
 	@Test
 	public void testNodeNode() {
-		
+		Node branch= new Node(tester);
+		assertEquals(branch.layer, 1);
+		assertTrue(branch.parent.equals(tester));
 	}
 
 	@Test

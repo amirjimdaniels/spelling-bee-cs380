@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Node {
 	char letter;
 	boolean word; 
-	int layer;
+	int layer=0;
 	Node parent;
 	Node[] childs= new Node[26];
 	/**
