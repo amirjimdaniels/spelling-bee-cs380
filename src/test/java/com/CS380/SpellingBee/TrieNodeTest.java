@@ -4,8 +4,13 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+<<<<<<< HEAD:src/test/java/com/CS380/SpellingBee/NodeTest.java
 public class NodeTest {
 	Node tester = new Node('a',true,null);
+=======
+public class TrieNodeTest {
+	TrieNode tester = new TrieNode('a',true,null);
+>>>>>>> 1b1c6a393ced561b091d2228bec224b4b0ecb850:src/test/java/com/CS380/SpellingBee/TrieNodeTest.java
 	
 
 	@Test
