@@ -2,20 +2,21 @@ package com.CS380.SpellingBee;
 
 import static org.junit.Assert.*;
 
+import org.junit.Before;
 import org.junit.Test;
 
-<<<<<<< HEAD:src/test/java/com/CS380/SpellingBee/NodeTest.java
-public class NodeTest {
-	Node tester = new Node('a',true,null);
-=======
-public class TrieNodeTest {
-	TrieNode tester = new TrieNode('a',true,null);
->>>>>>> 1b1c6a393ced561b091d2228bec224b4b0ecb850:src/test/java/com/CS380/SpellingBee/TrieNodeTest.java
-	
 
+public class TrieNodeTest {
+	 TrieNode tester;
+	@Before
+	public void setUp() {
+	
+	
+	 tester = new TrieNode('a',true,null);
+	}
 	@Test
 	public void testNodeCharBooleanNode() {
-		Node tester = new Node('a',true,null);
+		TrieNode tester = new TrieNode('a',true,null);
 		assertNotNull(tester);
 		assertEquals(tester.letter, 'a');
 		assertEquals(tester.word,true);
@@ -24,7 +25,7 @@ public class TrieNodeTest {
 
 	@Test
 	public void testNode() {
-		Node node = new Node();
+		TrieNode node = new TrieNode();
 		assertNotNull(node);
 		assertEquals(node.getLayer(), 0);
 
@@ -34,7 +35,7 @@ public class TrieNodeTest {
 
 	@Test
 	public void testNodeNode() {
-		Node branch= new Node(tester);
+		TrieNode branch= new TrieNode(tester);
 		assertEquals(branch.layer, 1);
 		assertTrue(branch.parent.equals(tester));
 	}
@@ -66,27 +67,31 @@ public class TrieNodeTest {
 
 	@Test
 	public void testGetChild() {
-		fail("Not yet implemented");
+	//	assertEquals(,tester.getChild('a'));
+		
 	}
 
 	@Test
 	public void testGetLetter() {
-		fail("Not yet implemented");
+		assertEquals('a', tester.getLetter());
 	}
 
 	@Test
 	public void testSetLetter() {
-		fail("Not yet implemented");
+		tester.setLetter('b');
+		
 	}
 
 	@Test
 	public void testGetLayer() {
-		fail("Not yet implemented");
+		assertEquals(0, tester.layer);
 	}
 
 	@Test
 	public void testSetLayer() {
-		fail("Not yet implemented");
+		tester.setLayer(10);
+		assertEquals(10, tester.getLayer());
+		
 	}
 
 	@Test

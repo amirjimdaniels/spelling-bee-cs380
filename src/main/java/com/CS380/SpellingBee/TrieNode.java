@@ -75,7 +75,7 @@ public class TrieNode {
 	}
 	
 	/**
-	 * Fake node for bad babies
+	 * 
 	 * <p>
 	 * creates a blank node for walking empty paths of the Trie.
 	 * <p>
