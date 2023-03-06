@@ -122,18 +122,22 @@ public class TrieNodeTest {
 
 	@Test
 	public void testGetChilds() {
-		fail("Not yet implemented");
+		TrieNode child=new TrieNode('a',true, tester);
+		tester.setChild(child);
 	}
 
 	@Test
 	public void testSetChilds() {
-		fail("Not yet implemented");
+		TrieNode child=new TrieNode('a',true, tester);
+		tester.setChild(child);
 	}
 
 	@Test
 	public void testSetWord() {
-		
-		fail("Not yet implemented");
+		TrieNode child=new TrieNode('a',false, tester);
+		tester.setChild(child);
+		child.setWord(true);
+		assertTrue(child.isWord());
 	
 }
 

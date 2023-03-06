@@ -27,7 +27,7 @@ public class TrieTest {
 	@Test
 	public void testAddWord() {
 		tester.addWord("duck");
-		assertTrue(tester.root.childs[3].childs[20].childs[2].childs[10].word);		//best method that uses no aditional method
+		assertTrue(tester.root.childs[3].childs[20].childs[2].childs[10].word);	//best method that uses no additional method
 		
 	}
 
