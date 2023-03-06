@@ -25,11 +25,24 @@ import java.util.ArrayList;
 public class TrieVisitor implements TrieVisitorMethods {
 	Trie myTrie;
 	TrieNode current;
+	
+	
+	
+	public TrieVisitor(Trie myTrie) {
+		this.myTrie= myTrie;
+		this.current= myTrie.root;
+	}
+	
+	
+	
 	/**
 	 * Returns the pathways as a list of nodes (for removing words/working within the list)
 	 * 
 	 * @return Pathway down to this node through the trie
 	 */
+	
+	
+	
 	public TrieNode[] getPathway(TrieNode node) {
 		ArrayList<TrieNode> pathway = new ArrayList<>();
 		TrieNode current = node;
