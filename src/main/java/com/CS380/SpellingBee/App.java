@@ -18,7 +18,7 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         scene = new Scene(loadFXML("primary"), 640, 480);
-        scene.getStylesheets().add("/spelling-bee-cs380/src/main/resources/com/CS380/SpellingBee/SpellingBee.css");
+        scene.getStylesheets().addAll(this.getClass().getResource("SpellingBee.css").toExternalForm());
         stage.setScene(scene);
         stage.show();
     }
