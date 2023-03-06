@@ -54,7 +54,7 @@ public class TrieNodeTest {
 	public void testHasChild() {
 		TrieNode child=new TrieNode('a',true, tester);
 		tester.setChild(child);
-		assertEquals(child, tester.hasChild('a'));
+		assertTrue( tester.hasChild('a'));
 	}
 
 	@Test
