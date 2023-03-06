@@ -1,25 +1,19 @@
 package com.CS380.SpellingBee;
 
+
 import java.util.ArrayList;
+	
 
 // TODO: Empty for now
 
 
-
-
-
-
-
-
-/*
+/**
+ * the TrieVisitor is the Object responsible for walking  the Trie and pulling words from nodes
  * 
  * 
  * 
- * PLACEHOLDER
- * 
- * 
- * 
- * 
+ * @author kieran leahy
+ *
  */
 
 
@@ -28,8 +22,9 @@ import java.util.ArrayList;
 
 
 
-public class TrieVisitor {
-	
+public class TrieVisitor implements TrieVisitorMethods {
+	Trie myTrie;
+	TrieNode current;
 	/**
 	 * Returns the pathways as a list of nodes (for removing words/working within the list)
 	 * 
@@ -44,5 +39,35 @@ public class TrieVisitor {
 		}
 		
 		return pathway.toArray(new TrieNode[0]);		// convert to an array of type TrieNode
+	}
+	@Override
+	public String[] getWordsFrom(String Letters) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public TrieNode walkDown() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public TrieNode walkUp() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public String getWord() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public String[] wordsOfLength(int length) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public int getMaxDepth() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }
