@@ -10,7 +10,7 @@
    <children>
       <ListView fx:id="listView" layoutX="371.0" layoutY="64.0" prefHeight="262.0" prefWidth="200.0" />
       <TextField fx:id="textField" layoutX="391.0" layoutY="29.0" />
-      <Button fx:id="buttonTop" layoutX="111.0" layoutY="25.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="63.0" styleClass="button1" stylesheets="@SpellingBee.css" text="Button" />
+      <Button fx:id="buttonTop" layoutX="111.0" layoutY="25.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="63.0" styleClass="buttonHexagon" stylesheets="@SpellingBee.css" text="Button" />
       <Button fx:id="buttonMiddleLeft" layoutX="52.0" layoutY="90.0" mnemonicParsing="false" text="Button" />
       <Button fx:id="buttonMiddleMiddle" layoutX="107.0" layoutY="91.0" mnemonicParsing="false" text="Button" />
       <Button fx:id="buttonMiddleRight" layoutX="161.0" layoutY="91.0" mnemonicParsing="false" text="Button" />
