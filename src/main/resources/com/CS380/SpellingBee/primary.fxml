@@ -10,15 +10,16 @@
    <children>
       <ListView fx:id="listView" layoutX="371.0" layoutY="64.0" prefHeight="262.0" prefWidth="200.0" />
       <TextField fx:id="textField" layoutX="391.0" layoutY="29.0" />
-      <Button fx:id="buttonTop" layoutX="111.0" layoutY="25.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="63.0" styleClass="buttonHexagon" stylesheets="@SpellingBee.css" text="Button" />
-      <Button fx:id="buttonMiddleLeft" layoutX="52.0" layoutY="90.0" mnemonicParsing="false" text="Button" />
-      <Button fx:id="buttonMiddleMiddle" layoutX="107.0" layoutY="91.0" mnemonicParsing="false" text="Button" />
-      <Button fx:id="buttonMiddleRight" layoutX="161.0" layoutY="91.0" mnemonicParsing="false" text="Button" />
-      <Button fx:id="buttonBottomLeft" layoutX="72.0" layoutY="117.0" mnemonicParsing="false" text="Button" />
-      <Button fx:id="buttonBottomRight" layoutX="126.0" layoutY="118.0" mnemonicParsing="false" text="Button" />
-      <Button fx:id="enter" layoutX="52.0" layoutY="200.0" mnemonicParsing="false" text="Enter" />
-      <Button fx:id="shuffle" layoutX="114.0" layoutY="201.0" mnemonicParsing="false" text="Shuffle" />
-      <Button fx:id="delete" layoutX="180.0" layoutY="201.0" mnemonicParsing="false" text="Delete" />
+      <Button fx:id="buttonTop" layoutX="112.0" layoutY="64.0" mnemonicParsing="false" prefHeight="63.0" prefWidth="63.0" styleClass="buttonHexagon" stylesheets="@SpellingBee.css" text="Button" />
+      <Button fx:id="buttonMiddleLeft" layoutX="62.0" layoutY="96.0" mnemonicParsing="false" prefHeight="63.0" prefWidth="63.0" styleClass="buttonHexagon" stylesheets="@SpellingBee.css" text="Button" />
+      <Button fx:id="buttonMiddleMiddle" layoutX="162.0" layoutY="95.0" mnemonicParsing="false" prefHeight="63.0" prefWidth="63.0" styleClass="buttonHexagon" stylesheets="@SpellingBee.css" text="Button" />
+      <Button fx:id="buttonMiddleRight" layoutX="112.0" layoutY="127.0" mnemonicParsing="false" prefHeight="63.0" prefWidth="63.0" styleClass="buttonHexagon" stylesheets="@SpellingBee.css" text="Button" />
+      <Button fx:id="buttonBottomLeft" layoutX="62.0" layoutY="159.0" mnemonicParsing="false" prefHeight="63.0" prefWidth="63.0" styleClass="buttonHexagon" stylesheets="@SpellingBee.css" text="Button" />
+      <Button fx:id="buttonBottomRight" layoutX="162.0" layoutY="159.0" mnemonicParsing="false" prefHeight="63.0" prefWidth="63.0" styleClass="buttonHexagon" stylesheets="@SpellingBee.css" text="Button" />
+      <Button fx:id="enter" layoutX="53.0" layoutY="281.0" mnemonicParsing="false" text="Enter" />
+      <Button fx:id="shuffle" layoutX="115.0" layoutY="282.0" mnemonicParsing="false" text="Shuffle" />
+      <Button fx:id="delete" layoutX="181.0" layoutY="282.0" mnemonicParsing="false" text="Delete" />
       <Label fx:id="myLabel" layoutX="1.0" layoutY="34.0" prefHeight="17.0" prefWidth="303.0" text="Word" />
+      <Button fx:id="buttonBottomRight1" layoutX="112.0" layoutY="191.0" mnemonicParsing="false" prefHeight="63.0" prefWidth="63.0" styleClass="buttonHexagon" stylesheets="@SpellingBee.css" text="Button" />
    </children>
 </AnchorPane>
