@@ -1,0 +1,8 @@
+.button{
+	-fx-text-fill: "Purple";
+	-fx-font-family: "Muller Next";
+}
+
+.buttonHexagon{
+	-fx-shape:"M 400 350 L 300 400 L 300 500 L 400 550 L 500 500 L 500 400 L 400 350";
+}
