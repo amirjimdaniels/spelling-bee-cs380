@@ -52,22 +52,33 @@ public class TrieNodeTest {
 
 	@Test
 	public void testHasChild() {
-		fail("Not yet implemented");
+		TrieNode child=new TrieNode('a',true, tester);
+		tester.setChild(child);
+		assertEquals(child, tester.hasChild('a'));
 	}
 
 	@Test
 	public void testSetChild() {
-		fail("Not yet implemented");
+		TrieNode child=new TrieNode('a',true, tester);
+		tester.setChild(child);
+		
+		assertEquals(child,tester.getChild('a'));
 	}
 
 	@Test
 	public void testRemoveChild() {
-		fail("Not yet implemented");
+		TrieNode child=new TrieNode('a',true, tester);
+		tester.setChild(child);
+		tester.removeChild('a');
+		assertNull(tester.getChild('a'));
 	}
 
 	@Test
 	public void testGetChild() {
-	//	assertEquals(,tester.getChild('a'));
+		TrieNode child=new TrieNode('a',true, tester);
+		tester.setChild(child);
+		
+		assertEquals(child,tester.getChild('a'));
 		
 	}
 
@@ -96,12 +107,17 @@ public class TrieNodeTest {
 
 	@Test
 	public void testGetParent() {
-		fail("Not yet implemented");
+		TrieNode child=new TrieNode('a',true, tester);
+		tester.setChild(child);
+		assertEquals(tester, child.getParent());
 	}
 
 	@Test
 	public void testSetParent() {
-		fail("Not yet implemented");
+		TrieNode child=new TrieNode('a',true, null);
+		child.setParent(tester);
+		
+		assertEquals(tester, child.getParent());
 	}
 
 	@Test
