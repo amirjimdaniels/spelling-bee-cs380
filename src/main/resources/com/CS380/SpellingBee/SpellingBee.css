@@ -7,5 +7,8 @@
  * I got it is using SVG Path Builder. It is a website to get the shape coordinates for the button. 
  */
 .buttonHexagon{
-	-fx-shape:"M 400 350 L 300 400 L 300 500 L 400 550 L 500 500 L 500 400 L 400 350";
+	-fx-shape:"M 450 450 L 300 450 L 250 350 L 300 250 L 450 250 L 500 350 L 450 450 ";
 }
+
+
+
