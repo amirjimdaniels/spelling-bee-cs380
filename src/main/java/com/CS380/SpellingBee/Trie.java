@@ -7,6 +7,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Trie implements TrieMethods {
+	
+	/**
+	 * holds the value equal to depth of lowest leafNode.
+	 */
+	int maxDepth;
+	
+	
+
 	/**
 	 * Root node of the trie, has a layer of 0 and a parent of null
 	 */
@@ -163,6 +171,20 @@ public class Trie implements TrieMethods {
 			return current;
 		} else { return null; }
 		
+	}
+	/**
+	 * returns maxDepth
+	 */
+	public int getMaxDepth() {
+		return maxDepth;
+	}
+
+/**
+ * sets maxDepth as param
+ * @param maxDepth
+ */
+	public void setMaxDepth(int maxDepth) {
+		this.maxDepth = maxDepth;
 	}
 
 	
