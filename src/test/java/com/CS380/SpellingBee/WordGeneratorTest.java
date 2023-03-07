@@ -2,10 +2,22 @@ package com.CS380.SpellingBee;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+
 import org.junit.Before;
 import org.junit.Test;
 
 public class WordGeneratorTest {
+	
+	private class TestWordGen extends WordGenerator {
+
+		public TestWordGen(TrieVisitor allWords) {
+			super(allWords);
+		}
+		
+		
+
+	}
 
 	@Before
 	public void setUp() throws Exception {
