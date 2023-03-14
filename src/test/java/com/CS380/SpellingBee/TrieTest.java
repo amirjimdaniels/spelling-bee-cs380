@@ -22,14 +22,49 @@ public class TrieTest {
 		assertEquals(0, tr.root.layer);
 		assertNull(tr.root.parent);
 		assertEquals(0, tr.root.letter);
+		assertArrayEquals(new TrieNode[26], tr.root.childs);
 	}
 
 	@Test
 	public void testAddWord() {
 		tester.addWord("duck");
 		assertTrue(tester.root.childs[3].childs[20].childs[2].childs[10].word);	//best method that uses no additional method
-		
 	}
+	
+	@Test
+	public void testAddWordDuplicateAdds() {
+		tester.addWord("duck");
+		assertTrue(tester.root.childs[3].childs[20].childs[2].childs[10].word);	//best method that uses no additional method
+		tester.addWord("duck");
+		assertTrue(tester.root.childs[3].childs[20].childs[2].childs[10].word);
+	}
+	
+	@Test
+	public void testAddWordNullWord() {
+		assertFalse(tester.addWord(null));
+	}
+	
+	@Test
+	public void testAddWordNotAlphabet1() {
+		assertFalse(tester.addWord(";9omp"));
+	}
+	
+	@Test
+	public void testAddWordNotAlphabet2() {
+		assertFalse(tester.addWord("this has a space"));
+	}
+	
+	@Test
+	public void testAddWordNotAlphabet3() {
+		assertFalse(tester.addWord("this6"));
+	}
+	
+	@Test
+	public void testAddWordValidWordCapital() {
+		assertTrue(tester.addWord("Bread"));
+		assertTrue(tester.root.childs[1].childs[17].childs[4].childs[0].childs[3].word);
+	}
+	
 
 	@Test
 	public void testAddWords() {

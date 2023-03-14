@@ -3,7 +3,6 @@ package com.CS380.SpellingBee;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.Reader;
-import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Trie implements TrieMethods {
@@ -49,6 +48,11 @@ public class Trie implements TrieMethods {
 	 */
 	@Override
 	public boolean addWord(String input) {
+		
+		if (input == null || !Arrays.stream(input.split("")).allMatch(s -> ("abcdefghijklmnopqrstuvwxyz".contains(s.toLowerCase())))) {
+			return false;
+		}
+		
 		/*
 		 * takes in String and turns into character array
 		 * iterates through creating nodes where ones do not already exists 

@@ -14,8 +14,6 @@ public class WordGeneratorTest {
 		public TestWordGen(TrieVisitor allWords) {
 			super(allWords);
 		}
-		
-		
 
 	}
 

@@ -1,6 +1,5 @@
 package com.CS380.SpellingBee;
 
-import java.util.ArrayList;
 /**
  * Node for a Trie
  * 
