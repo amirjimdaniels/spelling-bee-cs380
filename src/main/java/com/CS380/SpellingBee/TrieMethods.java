@@ -11,6 +11,10 @@ public interface TrieMethods {
 		 * @return
 		 */
 		public boolean addWord(String input);
+		/**
+		 * takes a list of words and adds them using iterative addWord
+		 * @param wordsIn
+		 */
 		
 		public void addWords(String... wordsIn);
 		
