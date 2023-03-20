@@ -80,6 +80,10 @@ public class Trie implements TrieMethods {
 		current.setWord(true);		// end of word!
 
 		numWordsInTrie++;
+		
+		if (current.getLayer() > this.maxDepth) {
+			setMaxDepth(current.getLayer());
+		}
 
 		return current.isWord();
 	}
@@ -107,7 +111,7 @@ public class Trie implements TrieMethods {
 	@Override
 	public boolean removeWord(String rWord) {
 
-		if (!Magic.isValidWordForGame(rWord)) {			// ensure alphanumeric
+		if (!Magic.isValidWordForGame(rWord)) {			// ensure alphanumeric and non-empty/null and within the length limits of the game
 			return false;
 		}
 
@@ -115,8 +119,12 @@ public class Trie implements TrieMethods {
 
 
 		if (endOfWord == null) return false; 		// if the word is not in the set, return
-		else endOfWord.word = false;
+		else endOfWord.setWord(false);
 
+		if (endOfWord.getLayer() == this.getMaxDepth()) {
+			fixupMaxDepth();
+		}
+		
 		numWordsInTrie--;
 		return true;
 
@@ -189,7 +197,6 @@ public class Trie implements TrieMethods {
 	public void setMaxDepth(int maxDepth) {
 		this.maxDepth = maxDepth;
 	}
-
 
 
 }
