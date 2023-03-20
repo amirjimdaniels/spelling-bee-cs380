@@ -43,13 +43,14 @@ public class Trie implements TrieMethods {
 	 * <p>
 	 * Creates nodes where nodes do not exist
 	 * </p>
-	 * 
-	 * <b>MAKE SURE THERE ARE NO CHARACTERS OUTSIDE OF 'a'-'z' BECUASE IT WILL BREAK</b>
 	 */
 	@Override
 	public boolean addWord(String input) {
 		
-		if (input == null || !Arrays.stream(input.split("")).allMatch(s -> ("abcdefghijklmnopqrstuvwxyz".contains(s.toLowerCase())))) {
+		/*
+		 * Ensures input is not null, is alphanumeric, and is not contained before adding
+		 */
+		if (input == null || !Arrays.stream(input.split("")).allMatch(s -> ("abcdefghijklmnopqrstuvwxyz".contains(s.toLowerCase()))) || containsWord(input) != null) {
 			return false;
 		}
 		
@@ -107,6 +108,10 @@ public class Trie implements TrieMethods {
 	@Override
 	public boolean removeWord(String rWord) {
 		
+		if (rWord == null || !Arrays.stream(rWord.split("")).allMatch(s -> ("abcdefghijklmnopqrstuvwxyz".contains(s.toLowerCase())))) {			// ensure alphanumeric
+			return false;
+		}
+		
 		TrieNode endOfWord = this.containsWord(rWord);	// use containedWord to get the lowest node in the word if it exists
 		
 		
@@ -159,7 +164,7 @@ public class Trie implements TrieMethods {
 	 */
 	@Override
 	public TrieNode containsWord(String cWord) {
-		if (numWordsInTrie <= 0) {
+		if (numWordsInTrie <= 0 || cWord == null || cWord == "") {
 			return null;
 		}
 		

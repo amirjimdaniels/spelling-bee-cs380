@@ -2,6 +2,16 @@ package com.CS380.SpellingBee;
 
 import static org.junit.Assert.*;
 
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.io.StringReader;
+import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -33,9 +43,9 @@ public class TrieTest {
 	
 	@Test
 	public void testAddWordDuplicateAdds() {
-		tester.addWord("duck");
+		assertTrue(tester.addWord("duck"));
 		assertTrue(tester.root.childs[3].childs[20].childs[2].childs[10].word);	//best method that uses no additional method
-		tester.addWord("duck");
+		assertFalse(tester.addWord("duck"));
 		assertTrue(tester.root.childs[3].childs[20].childs[2].childs[10].word);
 	}
 	@Test
@@ -95,6 +105,12 @@ public class TrieTest {
 	}
 	
 	@Test
+	public void testAddWordsDuplicateWords() {
+		tester.addWords("duck", "duck");
+		assertTrue(tester.root.childs[3].childs[20].childs[2].childs[10].word);
+	}
+	
+	@Test
 	public void testAddWordsNull() {
 		tester.addWords(null);
 	}
@@ -111,13 +127,111 @@ public class TrieTest {
 	}
 
 	@Test
-	public void testRemoveWord() {
-		fail("Not yet implemented"); // TODO
+	public void testRemoveWordEmptyListNotContained() {
+		assertFalse(tester.removeWord("bull"));
 	}
+	
+	@Test
+	public void testRemoveWordEmptyListNull() {
+		assertFalse(tester.removeWord(null));
+	}
+	
+	@Test
+	public void testRemoveWordEmptyListEmptyString() {
+		assertFalse(tester.removeWord(""));
+	}
+	
+	@Test
+	public void testRemoveWordEmptyListNotContainedButWordInTrie() {
+		tester.numWordsInTrie++;
+		assertFalse(tester.removeWord("bull"));
+	}
+	
+	@Test
+	public void testRemoveWordEmptyListNullButWordInTrie() {
+		tester.numWordsInTrie++;
+		assertFalse(tester.removeWord(null));
+	}
+	
+	@Test
+	public void testRemoveWordEmptyListEmptyStringButWordInTrie() {
+		tester.numWordsInTrie++;
+		assertFalse(tester.removeWord(""));
+	}
+	
+	@Test
+	public void testRemoveWordInList() {
+		TrieNode current = tester.root.setChild(new TrieNode('b', false, null));
+		current = current.setChild(new TrieNode('i', false, null));
+		current = current.setChild(new TrieNode('r', false, null));
+		current = current.setChild(new TrieNode('d', true, null));
+		
+		tester.numWordsInTrie++;
+		
+		assertTrue(tester.removeWord("bird"));
+		assertFalse(current.word);
+	}
+	
+	@Test
+	public void testRemoveWordNotInListButWordWas() {
+		TrieNode current = tester.root.setChild(new TrieNode('b', false, null));
+		current = current.setChild(new TrieNode('i', false, null));
+		current = current.setChild(new TrieNode('r', false, null));
+		current = current.setChild(new TrieNode('d', false, null));
+		
+		assertFalse(tester.removeWord("bird"));
+		assertFalse(current.word);
+	}
+	
+	@Test
+	public void testAddWordAndRemove() {
+		assertTrue(tester.addWord("bird"));
+		
+		assertTrue(tester.removeWord("bird"));
+	}
+	
+	@Test
+	public void testAddWordAndRemoveTwice() {
+		assertTrue(tester.addWord("bird"));
+		
+		assertTrue(tester.removeWord("bird"));
+		
+		assertTrue(tester.addWord("bird"));
+		
+		assertTrue(tester.removeWord("bird"));
+	}
+	
+	@Test
+	public void testAddWordsAndRemove() {
+		tester.addWords("bread", "duck");
+		
+		assertFalse(tester.removeWord("bird"));
+		
+		assertTrue(tester.addWord("bird"));
+		
+		assertTrue(tester.removeWord("bird"));
+		
+		assertTrue(tester.removeWord("duck"));
+		
+		assertTrue(tester.root.childs[1].childs[17].childs[4].childs[0].childs[3].word);		// ensure bread is contained
+		
+		assertFalse(tester.root.childs[3].childs[20].childs[2].childs[10].word);		// ensure duck is not contained
+	}
+	
+	
+	
 
 	@Test
-	public void testAddWordsFromStream() {
-		fail("Not yet implemented"); // TODO
+	public void testAddWordsFromStream() throws IOException {
+		String[] strings = {"duck", "bread"};
+		BufferedReader buffer = new BufferedReader( new StringReader(  String.join(  "\n", strings  )) );		// add words from strings to a bufferedreader
+		tester.addWordsFromStream(buffer);
+		
+		
+		assertTrue(tester.root.childs[1].childs[17].childs[4].childs[0].childs[3].word);		// ensure bread is contained
+		
+		assertTrue(tester.root.childs[3].childs[20].childs[2].childs[10].word);		// ensure duck is contained
+		
 	}
 
 	@Test
