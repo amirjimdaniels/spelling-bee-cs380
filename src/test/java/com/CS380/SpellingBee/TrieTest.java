@@ -239,11 +239,7 @@ public class TrieTest {
 		
 		
 	}
-
-	@Test
-	public void testIsWord() {
-		fail("Not yet implemented"); // TODO
-	}
+	
 
 	@Test
 	public void testNumWordsContained() {

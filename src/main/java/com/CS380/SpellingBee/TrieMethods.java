@@ -32,13 +32,6 @@ public interface TrieMethods {
 		public boolean removeWord(String rWord);
 
 		/**
-		 * Check if the node is a word
-		 * @param currentNode
-		 * @return
-		 */
-		public boolean isWord(TrieNode currentNode);
-
-		/**
 		 * Keep tabs on how many words are in the trie
 		 * @return
 		 */

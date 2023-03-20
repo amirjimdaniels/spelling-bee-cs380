@@ -142,15 +142,6 @@ public class Trie implements TrieMethods {
 	}
 
 	/**
-	 * Checks if the given node is the end of a word
-	 * (is effectively a passthrough down to the node)
-	 */
-	@Override
-	public boolean isWord(TrieNode currentNode) {
-		return currentNode.isWord();
-	}
-
-	/**
 	 * Return the current number of words stored in the trie
 	 */
 	@Override
