@@ -27,6 +27,7 @@ public class TrieTest {
 		assertNull(tr.root.parent);
 		assertEquals(0, tr.root.letter);
 		assertArrayEquals(new TrieNode[26], tr.root.childs);
+		assertEquals(0, tr.maxDepth);
 	}
 
 	@Test
@@ -243,12 +244,272 @@ public class TrieTest {
 
 	@Test
 	public void testNumWordsContained() {
-		fail("Not yet implemented"); // TODO
+		tester.numWordsInTrie = 1;
+		
+		assertEquals(1, tester.numWordsContained());
+	}
+	
+	@Test
+	public void testNumWordsContainedThroughAddsAndRemoves() {
+		tester.addWord("cooling");
+		assertEquals(1, tester.numWordsContained());
+		
+		tester.addWords("ball", "football", "duck");
+		
+		assertEquals(4, tester.numWordsContained());
+		
+		tester.removeWord("ball");
+		
+		assertEquals(3, tester.numWordsContained());
+		
+		tester.removeWord("");		// make sure the function doesn't do it unles sit actually removes soemthing
+		
+		assertEquals(3, tester.numWordsContained());
+		
+		tester.removeWord("ducks");
+		
+		assertEquals(3, tester.numWordsContained());
+		
+		tester.removeWord("duck");
+		
+		assertEquals(2, tester.numWordsContained());
 	}
 
 	@Test
-	public void testContainsWord() {
-		fail("Not yet implemented"); // TODO
+	public void testContainsWordEmptyList() {
+		assertNull(tester.containsWord("duck"));
 	}
+	
+	@Test
+	public void testContainsWordEmptyListNull() {
+		assertNull(tester.containsWord(null));
+	}
+	
+	@Test
+	public void testContainsWordEmptyListEmptyString() {
+		assertNull(tester.containsWord(""));
+	}
+	
+	@Test
+	public void testContainsWordOneWordInListNotContained() {
+		tester.numWordsInTrie++;
+		assertNull(tester.containsWord("duck"));
+	}
+	
+	@Test
+	public void testContainsWordOneWordInListNull() {
+		tester.numWordsInTrie++;
+		assertNull(tester.containsWord(null));
+	}
+	
+	@Test
+	public void testContainsWordOneWordInListEmptyString() {
+		tester.numWordsInTrie++;
+		assertNull(tester.containsWord(""));
+	}
+	
+	@Test
+	public void testContainsWordOneWordInListContained() {
+		tester.numWordsInTrie++;
+		
+		TrieNode current = tester.root.setChild(new TrieNode('b', false, null));
+		current = current.setChild(new TrieNode('i', false, null));
+		current = current.setChild(new TrieNode('r', false, null));
+		current = current.setChild(new TrieNode('d', true, null));
+		
+		
+		assertNotNull(tester.containsWord("bird"));
+		
+		TrieNode returnedNode = tester.containsWord("bird");
+		
+		assertEquals('d', returnedNode.getLetter());
+		assertEquals(4, returnedNode.getLayer());
+		assertEquals('r', returnedNode.getParent().getLetter());		// that's probably enough
+	}
+	
+	@Test
+	public void testContainsWordOneWordInListContainedCapitalization() {
+		tester.numWordsInTrie++;
+		
+		TrieNode current = tester.root.setChild(new TrieNode('b', false, null));
+		current = current.setChild(new TrieNode('i', false, null));
+		current = current.setChild(new TrieNode('r', false, null));
+		current = current.setChild(new TrieNode('d', true, null));
+		
+		
+		assertNotNull(tester.containsWord("BiRd"));
+		assertNotNull(tester.containsWord("BIRD"));
+		assertNotNull(tester.containsWord("bIRD"));
+		assertNotNull(tester.containsWord("BIRd"));
+	}
+	
+	@Test
+	public void testContainsWordOneWordInListFormerlyContained() {
+		tester.numWordsInTrie++;
+		
+		TrieNode current = tester.root.setChild(new TrieNode('b', false, null));
+		current = current.setChild(new TrieNode('i', false, null));
+		current = current.setChild(new TrieNode('r', false, null));
+		current = current.setChild(new TrieNode('d', false, null));
+		
+		
+		assertNull(tester.containsWord("bird"));
+	}
+	
+	@Test
+	public void testContainsWordTwoWordInList() {
+		tester.numWordsInTrie += 2;
+		
+		TrieNode current = tester.root.setChild(new TrieNode('b', false, null));
+		current = current.setChild(new TrieNode('i', false, null));
+		current = current.setChild(new TrieNode('r', false, null));
+		current = current.setChild(new TrieNode('d', true, null));
+		
+		TrieNode current2 = tester.root.setChild(new TrieNode('r', false, null));
+		current2 = current2.setChild(new TrieNode('o', false, null));
+		current2 = current2.setChild(new TrieNode('c', false, null));
+		current2 = current2.setChild(new TrieNode('k', true, null));
+		
+		
+		assertNotNull(tester.containsWord("bird"));
+		assertNotNull(tester.containsWord("rock"));
+		assertNull(tester.containsWord("birds"));
+	}
+	
+	
+	@Test
+	public void testContainsWordWithAddsAndRemoves() {
+		
+		tester.addWord("birds");
+		
+		assertNull(tester.containsWord("bird"));
+		assertNull(tester.containsWord("rock"));
+		assertNotNull(tester.containsWord("birds"));
+		
+		tester.addWords("bird", "rock");
+		
+		
+		assertNotNull(tester.containsWord("bird"));
+		assertNotNull(tester.containsWord("rock"));
+		assertNotNull(tester.containsWord("birds"));
+		
+		tester.removeWord("birds");
+		
+		assertNotNull(tester.containsWord("bird"));
+		assertNotNull(tester.containsWord("rock"));
+		assertNull(tester.containsWord("birds"));
+		
+		tester.removeWord("bird");
+		tester.removeWord("rock");
+		
+		assertNull(tester.containsWord("bird"));
+		assertNull(tester.containsWord("rock"));
+		assertNull(tester.containsWord("birds"));
+		
+	}
+	
+	@Test
+	public void testGetMaxDepth() {
+		assertEquals(0, tester.getMaxDepth());
+		
+		tester.maxDepth = 4;
+		
+		assertEquals(4, tester.getMaxDepth());
+	}
+	
+	@Test
+	public void testGetMaxDepthAfterAdd() {
+		tester.addWord("bird");
+		
+		assertEquals(4, tester.getMaxDepth());
+	}
+	
+	@Test
+	public void testGetMaxDepthAfterRemove() {
+		TrieNode current = tester.root.setChild(new TrieNode('b', false, null));
+		current = current.setChild(new TrieNode('i', false, null));
+		current = current.setChild(new TrieNode('r', false, null));
+		current = current.setChild(new TrieNode('d', true, null));
+		
+		tester.removeWord("bird");
+		
+		assertEquals(4, tester.getMaxDepth());
+	}
+	
+	@Test
+	public void testGetMaxDepthWithAddsAndRemoves() {
+		
+		tester.addWord("bird");
+		
+		assertEquals(4, tester.getMaxDepth());
+		
+		tester.removeWord("bird");
+		
+		assertEquals(0, tester.getMaxDepth());
+		
+		tester.addWords("bird", "birds", "train", "busses");
+		
+		assertEquals(6, tester.getMaxDepth());
+	}
+	
+	@Test
+	public void testSetMaxDepth() {
+		assertEquals(0, tester.maxDepth);
+		
+		tester.setMaxDepth(4);
+		
+		assertEquals(4, tester.maxDepth);
+		
+		
+		tester.setMaxDepth(7);
+		
+		assertEquals(7, tester.maxDepth);
+	}
+	
+	
+	@Test
+	public void testAllOfThem() {
+		
+		assertEquals(0, tester.numWordsContained());
+		
+		tester.addWord("birds");
+		
+		assertNull(tester.containsWord("bird"));
+		assertNull(tester.containsWord("rock"));
+		assertNotNull(tester.containsWord("birds"));
+		assertEquals(1, tester.numWordsContained());
+		assertEquals(5, tester.getMaxDepth());
+		
+		tester.addWords("bird", "rock");
+		
+		
+		assertNotNull(tester.containsWord("bird"));
+		assertNotNull(tester.containsWord("rock"));
+		assertNotNull(tester.containsWord("birds"));
+		assertEquals(3, tester.numWordsContained());
+		assertEquals(5, tester.getMaxDepth());
+		
+		tester.removeWord("birds");
+		
+		assertNotNull(tester.containsWord("bird"));
+		assertNotNull(tester.containsWord("rock"));
+		assertNull(tester.containsWord("birds"));
+		assertEquals(2, tester.numWordsContained());
+		assertEquals(4, tester.getMaxDepth());
+		
+		tester.removeWord("bird");
+		tester.removeWord("rock");
+		
+		assertNull(tester.containsWord("bird"));
+		assertNull(tester.containsWord("rock"));
+		assertNull(tester.containsWord("birds"));
+		assertEquals(0, tester.numWordsContained());
+		assertEquals(0, tester.getMaxDepth());
+		
+	}
+	
+	
+	
+	
 
 }
