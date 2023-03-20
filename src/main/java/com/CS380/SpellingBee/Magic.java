@@ -1,6 +1,6 @@
 package com.CS380.SpellingBee;
 
-
+import java.util.Arrays;
 
 /**
  * This is an ever-developing piece of code, which is simply a toolbox for commonly used regex functions.
@@ -36,6 +36,28 @@ public class Magic {
 		}
 		
 		return output.toString();
+	}
+	
+	public static boolean isWordOfNormalForm(String testString) {
+		/*
+		 * Ensures input is not null, is alphanumeric, and is not contained before adding
+		 */
+		if (testString == null || 
+				testString == "" ||
+				!Arrays.stream(testString.split("")).allMatch(s -> ("abcdefghijklmnopqrstuvwxyz".contains(s.toLowerCase())))
+				) {
+			return false;
+		}
+		
+		return true;
+	}
+	
+	public static boolean isValidWordForGame(String testWord) {
+		if (isWordOfNormalForm(testWord) && testWord.length() >= App.MINIMUM_WORD_LENGTH) {
+			return true;
+		}
+		
+		return false;
 	}
 
 }

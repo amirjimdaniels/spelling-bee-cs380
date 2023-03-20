@@ -14,6 +14,8 @@ import java.io.IOException;
 public class App extends Application {
 
     private static Scene scene;
+    
+    public static final int MINIMUM_WORD_LENGTH = 4;			// we should put this somewhere better - this is temporary
 
     @Override
     public void start(Stage stage) throws IOException {

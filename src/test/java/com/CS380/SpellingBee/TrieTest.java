@@ -218,8 +218,6 @@ public class TrieTest {
 		assertFalse(tester.root.childs[3].childs[20].childs[2].childs[10].word);		// ensure duck is not contained
 	}
 	
-	
-	
 
 	@Test
 	public void testAddWordsFromStream() throws IOException {

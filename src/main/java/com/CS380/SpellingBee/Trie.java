@@ -48,9 +48,9 @@ public class Trie implements TrieMethods {
 	public boolean addWord(String input) {
 		
 		/*
-		 * Ensures input is not null, is alphanumeric, and is not contained before adding
+		 * Ensures input is a valid word for the game and is not contained before adding
 		 */
-		if (input == null || !Arrays.stream(input.split("")).allMatch(s -> ("abcdefghijklmnopqrstuvwxyz".contains(s.toLowerCase()))) || containsWord(input) != null) {
+		if (!Magic.isValidWordForGame(input) || containsWord(input) == null) {
 			return false;
 		}
 		
@@ -108,7 +108,7 @@ public class Trie implements TrieMethods {
 	@Override
 	public boolean removeWord(String rWord) {
 		
-		if (rWord == null || !Arrays.stream(rWord.split("")).allMatch(s -> ("abcdefghijklmnopqrstuvwxyz".contains(s.toLowerCase())))) {			// ensure alphanumeric
+		if (!Magic.isValidWordForGame(rWord)) {			// ensure alphanumeric
 			return false;
 		}
 		
@@ -164,7 +164,7 @@ public class Trie implements TrieMethods {
 	 */
 	@Override
 	public TrieNode containsWord(String cWord) {
-		if (numWordsInTrie <= 0 || cWord == null || cWord == "") {
+		if (numWordsInTrie <= 0 || !Magic.isValidWordForGame(cWord)) {
 			return null;
 		}
 		
