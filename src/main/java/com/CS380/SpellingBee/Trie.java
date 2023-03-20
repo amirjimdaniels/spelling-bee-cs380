@@ -89,6 +89,9 @@ public class Trie implements TrieMethods {
 	 */
 	@Override
 	public void addWords(String... wordsIn) {
+		if (wordsIn == null) {
+			return;
+		}
 		for (String word: wordsIn) {
 			addWord(word);
 		}

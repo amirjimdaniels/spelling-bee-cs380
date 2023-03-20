@@ -38,6 +38,13 @@ public class TrieTest {
 		tester.addWord("duck");
 		assertTrue(tester.root.childs[3].childs[20].childs[2].childs[10].word);
 	}
+	@Test
+	public void testAddWordTwoAdds() {
+		tester.addWord("duck");
+		tester.addWord("bread");
+		assertTrue(tester.root.childs[3].childs[20].childs[2].childs[10].word);
+		assertTrue(tester.root.childs[1].childs[17].childs[4].childs[0].childs[3].word);
+	}
 	
 	@Test
 	public void testAddWordNullWord() {
@@ -67,8 +74,40 @@ public class TrieTest {
 	
 
 	@Test
-	public void testAddWords() {
-		fail("Not yet implemented"); // TODO
+	public void testAddWordsSingle() {
+		tester.addWords("bread");
+		assertTrue(tester.root.childs[1].childs[17].childs[4].childs[0].childs[3].word);
+	}
+	
+	@Test
+	public void testAddWordsSingleTwice() {
+		tester.addWords("bread");
+		tester.addWords("duck");
+		assertTrue(tester.root.childs[3].childs[20].childs[2].childs[10].word);
+		assertTrue(tester.root.childs[1].childs[17].childs[4].childs[0].childs[3].word);
+	}
+	
+	@Test
+	public void testAddWordsTwoWords() {
+		tester.addWords("bread", "duck");
+		assertTrue(tester.root.childs[3].childs[20].childs[2].childs[10].word);
+		assertTrue(tester.root.childs[1].childs[17].childs[4].childs[0].childs[3].word);
+	}
+	
+	@Test
+	public void testAddWordsNull() {
+		tester.addWords(null);
+	}
+	
+	@Test
+	public void testAddWordsListOfNull() {
+		tester.addWords(null, null, null);
+	}
+	
+	@Test
+	public void testAddWordsListOfNullAndNonNull() {
+		tester.addWords(null, "duck", null);
+		assertTrue(tester.root.childs[3].childs[20].childs[2].childs[10].word);
 	}
 
 	@Test
