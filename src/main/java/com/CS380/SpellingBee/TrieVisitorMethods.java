@@ -1,5 +1,7 @@
 package com.CS380.SpellingBee;
 
+import java.util.ArrayList;
+
 public interface TrieVisitorMethods {
 	
 	
@@ -9,7 +11,7 @@ public interface TrieVisitorMethods {
 	 * @return
 	 */
 	public TrieNode[] getPathway(TrieNode node); 
-	
+	public ArrayList<String> getAllWords();
 	public String[] getWordsFrom(String Letters);
 	public TrieNode walkDown();
 	public TrieNode walkUp();

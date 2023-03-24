@@ -84,4 +84,10 @@ public class TrieVisitor implements TrieVisitorMethods {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+	@Override
+	public ArrayList<String> getAllWords() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
