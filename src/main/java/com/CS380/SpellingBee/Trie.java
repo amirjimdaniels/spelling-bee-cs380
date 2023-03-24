@@ -207,16 +207,23 @@ public class Trie implements TrieMethods {
 		TrieVisitor contents = new TrieVisitor(this);
 		String[] content = contents.wordsOfLength(maxDepth);
 		
-		for (int i = this.maxDepth-1; i >= App.MINIMUM_WORD_LENGTH && content == null; i++) {
+		if (content != null) {		// return if there's still a word at the max depth
+			return;
+		}
+		
+		// TODO: Update App.MINIMUM_WORD_LENGTH to a better location
+		
+		for (int i = this.maxDepth-1; i >= App.MINIMUM_WORD_LENGTH && content == null; i++) {		// loop intil we either get too small or have a content
 			
 			content = contents.wordsOfLength(i);
 			
-			if (content != null) {
+			if (content != null) {			// if the new content has words in it, set the max depth to i
 				this.setMaxDepth(i);
+				return;						// we're good!
 			}
 		}
-
-		this.maxDepth = 0;
+		
+		this.maxDepth = 0;					// if we never find any words, there is no maxdepth
 	}
 
 

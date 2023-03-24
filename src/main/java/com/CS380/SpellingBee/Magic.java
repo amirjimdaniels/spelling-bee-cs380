@@ -53,6 +53,7 @@ public class Magic {
 	}
 	
 	public static boolean isValidWordForGame(String testWord) {
+		// TODO: App.MINIMUM_WORD_LENGTH should be in a better location
 		if (isWordOfNormalForm(testWord) && testWord.length() >= App.MINIMUM_WORD_LENGTH) {
 			return true;
 		}
