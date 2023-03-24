@@ -77,7 +77,24 @@ public class TrieTest {
 		assertTrue(tester.root.childs[1].childs[17].childs[4].childs[0].childs[3].word);
 	}
 	
-
+	@Test
+	public void testAddWordAndContainsRandomWords() {
+		String[] strings = new String[100];
+		
+		for (int i = 0; i < strings.length; i++) {
+			strings[i] = Magic.generateRandomWordOfLength((int) (100*Math.random()));
+			tester.addWord(strings[i]);
+			System.out.println(strings[i]);
+		}
+		
+		for (int i = 0; i < strings.length; i++) {
+			if (strings[i].length() >= App.MINIMUM_WORD_LENGTH) {
+				assertNotNull(tester.containsWord(strings[i]));
+				assertEquals(strings[i].charAt(strings[i].length() - 1), tester.containsWord(strings[i]).letter);
+			}
+		}
+	}
+	
 	@Test
 	public void testAddWordsSingle() {
 		tester.addWords("bread");
@@ -465,6 +482,140 @@ public class TrieTest {
 		tester.setMaxDepth(7);
 		
 		assertEquals(7, tester.maxDepth);
+	}
+	
+	@Test
+	public void testFixupMaxDepthEmptyList() {
+		tester.fixupMaxDepth();
+		
+		assertEquals(0, tester.maxDepth);
+	}
+	
+	@Test
+	public void testFixupMaxDepthOneElementFourDeep() {
+		
+		TrieNode current = tester.root.setChild(new TrieNode('b', false, null));
+		current = current.setChild(new TrieNode('i', false, null));
+		current = current.setChild(new TrieNode('r', false, null));
+		current = current.setChild(new TrieNode('d', true, null));
+		
+		
+		tester.fixupMaxDepth();
+		
+		assertEquals(4, tester.maxDepth);
+	}
+	
+	@Test
+	public void testFixupMaxDepthOneElementSevenLong() {
+		
+		TrieNode current = tester.root.setChild(new TrieNode('b', false, null));
+		current = current.setChild(new TrieNode('i', false, null));
+		current = current.setChild(new TrieNode('r', false, null));
+		current = current.setChild(new TrieNode('d', false, null));
+		current = current.setChild(new TrieNode('i', false, null));
+		current = current.setChild(new TrieNode('e', false, null));
+		current = current.setChild(new TrieNode('s', true, null));
+		
+		
+		tester.fixupMaxDepth();
+		
+		assertEquals(7, tester.maxDepth);
+	}
+	
+	@Test
+	public void testFixupMaxDepthTwoElementDuplicatePathsFindLonger() {
+		
+		TrieNode current = tester.root.setChild(new TrieNode('b', false, null));
+		current = current.setChild(new TrieNode('i', false, null));
+		current = current.setChild(new TrieNode('r', false, null));
+		current = current.setChild(new TrieNode('d', true, null));
+		current = current.setChild(new TrieNode('i', false, null));
+		current = current.setChild(new TrieNode('e', false, null));
+		current = current.setChild(new TrieNode('s', true, null));
+		
+		
+		tester.fixupMaxDepth();
+		
+		assertEquals(7, tester.maxDepth);
+	}
+	
+	@Test
+	public void testFixupMaxDepthTwoElement() {
+		
+		TrieNode current = tester.root.setChild(new TrieNode('b', false, null));
+		current = current.setChild(new TrieNode('i', false, null));
+		current = current.setChild(new TrieNode('r', false, null));
+		current = current.setChild(new TrieNode('d', true, null));
+		
+		TrieNode current2 = tester.root.setChild(new TrieNode('r', false, null));
+		current2 = current2.setChild(new TrieNode('o', false, null));
+		current2 = current2.setChild(new TrieNode('c', false, null));
+		current2 = current2.setChild(new TrieNode('k', false, null));
+		current2 = current2.setChild(new TrieNode('s', true, null));
+		
+		
+		tester.fixupMaxDepth();
+		
+		assertEquals(5, tester.maxDepth);
+	}
+	
+	@Test
+	public void testFixupMaxDepthThroughAdds() {
+		
+		tester.addWord("brock");
+		
+		assertEquals(5, tester.maxDepth);
+		
+		tester.addWord("ruthless");
+		
+		assertEquals(8, tester.maxDepth);
+	}
+	
+	
+	@Test
+	public void testFixupMaxDepthThroughRemoves() {
+		
+		TrieNode current = tester.root.setChild(new TrieNode('b', false, null));
+		current = current.setChild(new TrieNode('i', false, null));
+		current = current.setChild(new TrieNode('r', false, null));
+		current = current.setChild(new TrieNode('d', true, null));
+		current = current.setChild(new TrieNode('i', false, null));
+		current = current.setChild(new TrieNode('e', false, null));
+		current = current.setChild(new TrieNode('s', true, null));
+		
+		current = tester.root.setChild(new TrieNode('r', false, null));
+		current = current.setChild(new TrieNode('o', false, null));
+		current = current.setChild(new TrieNode('c', false, null));
+		current = current.setChild(new TrieNode('k', true, null));
+		current = current.setChild(new TrieNode('i', false, null));
+		current = current.setChild(new TrieNode('e', false, null));
+		current = current.setChild(new TrieNode('s', true, null));
+		
+		tester.maxDepth = 7;
+		
+		tester.removeWord("bird");
+		
+		assertEquals(7, tester.maxDepth);
+		
+		tester.removeWord("ruthless");
+		
+		assertEquals(7, tester.maxDepth);
+		
+		tester.removeWord("rockies");
+		
+		assertEquals(7, tester.maxDepth);
+		
+		tester.removeWord("birdies");
+		
+		assertEquals(4, tester.maxDepth);
+		
+		tester.removeWord("rock");
+		
+		assertEquals(4, tester.maxDepth);
+		
+		tester.removeWord("bird");
+		
+		assertEquals(0, tester.maxDepth);
 	}
 	
 	

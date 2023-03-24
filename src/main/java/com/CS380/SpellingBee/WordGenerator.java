@@ -72,7 +72,7 @@ public class WordGenerator implements WordGeneratorMethods {
 	@Override
 	public List<String> getDailyWordsAsList() {
 		ArrayList<String> rtnList = new ArrayList<>();
-		for (String str : dailyWords.getWordsFrom("abcdefghijklmnopqrstuvwxyz")) {			// I don't think this is the intended functionality
+		for (String str : dailyWords.getAllWords()) {			// I don't think this is the intended functionality
 			rtnList.add(str);
 		}
 		

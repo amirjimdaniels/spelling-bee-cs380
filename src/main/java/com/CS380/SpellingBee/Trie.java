@@ -213,7 +213,7 @@ public class Trie implements TrieMethods {
 		
 		// TODO: Update App.MINIMUM_WORD_LENGTH to a better location
 		
-		for (int i = this.maxDepth-1; i >= App.MINIMUM_WORD_LENGTH && content == null; i++) {		// loop intil we either get too small or have a content
+		for (int i = this.maxDepth-1; i >= App.MINIMUM_WORD_LENGTH; i++) {		// loop until we get too small
 			
 			content = contents.wordsOfLength(i);
 			
