@@ -187,6 +187,7 @@ public class Trie implements TrieMethods {
 	 * returns maxDepth
 	 */
 	public int getMaxDepth() {
+		fixupMaxDepth();
 		return maxDepth;
 	}
 
@@ -196,6 +197,26 @@ public class Trie implements TrieMethods {
 	 */
 	public void setMaxDepth(int maxDepth) {
 		this.maxDepth = maxDepth;
+	}
+	
+	/**
+	 * Fixup the maxdepth using a TrieVisitor to gather all of the words of each length
+	 */
+	public void fixupMaxDepth() {
+		
+		TrieVisitor contents = new TrieVisitor(this);
+		String[] content = contents.wordsOfLength(maxDepth);
+		
+		for (int i = this.maxDepth-1; i >= App.MINIMUM_WORD_LENGTH && content == null; i++) {
+			
+			content = contents.wordsOfLength(i);
+			
+			if (content != null) {
+				this.setMaxDepth(i);
+			}
+		}
+
+		this.maxDepth = 0;
 	}
 
 

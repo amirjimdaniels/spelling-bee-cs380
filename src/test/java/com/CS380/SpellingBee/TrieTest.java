@@ -426,6 +426,7 @@ public class TrieTest {
 	
 	@Test
 	public void testGetMaxDepthAfterRemove() {
+		
 		TrieNode current = tester.root.setChild(new TrieNode('b', false, null));
 		current = current.setChild(new TrieNode('i', false, null));
 		current = current.setChild(new TrieNode('r', false, null));
