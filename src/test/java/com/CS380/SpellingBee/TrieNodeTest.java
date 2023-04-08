@@ -2,12 +2,18 @@ package com.CS380.SpellingBee;
 
 import static org.junit.Assert.*;
 
+import org.junit.Before;
 import org.junit.Test;
 
-public class TrieNodeTest {
-	TrieNode tester = new TrieNode('a',true,null);
-	
 
+public class TrieNodeTest {
+	 TrieNode tester;
+	@Before
+	public void setUp() {
+	
+	
+	 tester = new TrieNode('a',true,null);
+	}
 	@Test
 	public void testNodeCharBooleanNode() {
 		TrieNode tester = new TrieNode('a',true,null);
@@ -33,81 +39,105 @@ public class TrieNodeTest {
 		assertEquals(branch.layer, 1);
 		assertTrue(branch.parent.equals(tester));
 	}
-
-	@Test
-	public void testGetPathway() {
-		fail("Not yet implemented");
-	}
+// removed to make way for visitor class
+//	@Test
+//	public void testGetPathway() {
+//		fail("Not yet implemented");
+//	}
 
 	@Test
 	public void testIsWord() {
-		fail("Not yet implemented");
+		assertTrue(tester.isWord());
 	}
 
 	@Test
 	public void testHasChild() {
-		fail("Not yet implemented");
+		TrieNode child=new TrieNode('a',true, tester);
+		tester.setChild(child);
+		assertTrue( tester.hasChild('a'));
 	}
 
 	@Test
 	public void testSetChild() {
-		fail("Not yet implemented");
+		TrieNode child=new TrieNode('a',true, tester);
+		tester.setChild(child);
+		
+		assertEquals(child,tester.getChild('a'));
 	}
 
 	@Test
 	public void testRemoveChild() {
-		fail("Not yet implemented");
+		TrieNode child=new TrieNode('a',true, tester);
+		tester.setChild(child);
+		tester.removeChild('a');
+		assertNull(tester.getChild('a'));
 	}
 
 	@Test
 	public void testGetChild() {
-		fail("Not yet implemented");
+		TrieNode child=new TrieNode('a',true, tester);
+		tester.setChild(child);
+		
+		assertEquals(child,tester.getChild('a'));
+		
 	}
 
 	@Test
 	public void testGetLetter() {
-		fail("Not yet implemented");
+		assertEquals('a', tester.getLetter());
 	}
 
 	@Test
 	public void testSetLetter() {
-		fail("Not yet implemented");
+		tester.setLetter('b');
+		
 	}
 
 	@Test
 	public void testGetLayer() {
-		fail("Not yet implemented");
+		assertEquals(0, tester.layer);
 	}
 
 	@Test
 	public void testSetLayer() {
-		fail("Not yet implemented");
+		tester.setLayer(10);
+		assertEquals(10, tester.getLayer());
+		
 	}
 
 	@Test
 	public void testGetParent() {
-		fail("Not yet implemented");
+		TrieNode child=new TrieNode('a',true, tester);
+		tester.setChild(child);
+		assertEquals(tester, child.getParent());
 	}
 
 	@Test
 	public void testSetParent() {
-		fail("Not yet implemented");
+		TrieNode child=new TrieNode('a',true, null);
+		child.setParent(tester);
+		
+		assertEquals(tester, child.getParent());
 	}
 
 	@Test
 	public void testGetChilds() {
-		fail("Not yet implemented");
+		TrieNode child=new TrieNode('a',true, tester);
+		tester.setChild(child);
 	}
 
 	@Test
 	public void testSetChilds() {
-		fail("Not yet implemented");
+		TrieNode child=new TrieNode('a',true, tester);
+		tester.setChild(child);
 	}
 
 	@Test
 	public void testSetWord() {
-		
-		fail("Not yet implemented");
+		TrieNode child=new TrieNode('a',false, tester);
+		tester.setChild(child);
+		child.setWord(true);
+		assertTrue(child.isWord());
 	
 }
 

@@ -1,6 +1,5 @@
 package com.CS380.SpellingBee;
 
-import java.util.ArrayList;
 /**
  * Node for a Trie
  * 
@@ -75,7 +74,7 @@ public class TrieNode {
 	}
 	
 	/**
-	 * Fake node for bad babies
+	 * 
 	 * <p>
 	 * creates a blank node for walking empty paths of the Trie.
 	 * <p>

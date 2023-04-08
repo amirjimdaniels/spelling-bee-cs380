@@ -11,6 +11,10 @@ public interface TrieMethods {
 		 * @return
 		 */
 		public boolean addWord(String input);
+		/**
+		 * takes a list of words and adds them using iterative addWord
+		 * @param wordsIn
+		 */
 		
 		public void addWords(String... wordsIn);
 		
@@ -26,13 +30,6 @@ public interface TrieMethods {
 		 * @return true if successfully remove, false if not
 		 */
 		public boolean removeWord(String rWord);
-
-		/**
-		 * Check if the node is a word
-		 * @param currentNode
-		 * @return
-		 */
-		public boolean isWord(TrieNode currentNode);
 
 		/**
 		 * Keep tabs on how many words are in the trie
