@@ -1,5 +1,8 @@
 package com.CS380.SpellingBee;
 
+/**
+ * Interface for the Game class, has basic game logic method stubs
+ */
 public interface GameLogic {
 
 public boolean isCorrectWordLength(String word);

@@ -2,14 +2,23 @@ package com.CS380.SpellingBee;
 
 import java.util.List;
 
+/**
+ * Class that stores information about the current game status, such as points/rank/etc.
+ */
 public class Game implements GameLogic {
-	private int points = 0;
-	WordGenerator wordGen;
-	private String[] listOfLetters;
-	private String rank;
+	private int points = 0; //tracks the number of points the player has
+	WordGenerator wordGen; //generates the words for the day
+	private String[] listOfLetters; //stores the list of letters in the game
+	private String rank = "Beginner"; //the rank the player has reached for the day
+	private int rankValue = 0; //a number to represent the rank (for progress bar in UI)
 	
+	/**
+	 * Constructor
+	 * @param inputListOfLetters
+	 * @param inputWordGen
+	 */
 	public Game(String []inputListOfLetters, WordGenerator inputWordGen) {
-		this.listOfLetters = listOfLetters;
+		this.listOfLetters = inputListOfLetters;
 		this.wordGen = inputWordGen;
 	}
 
@@ -68,138 +77,172 @@ public class Game implements GameLogic {
 	public void setRank(String rank) {
 		this.rank = rank;
 	}
+	
+	public int getRankValue() {
+		return rankValue;
+	}
 
+	public void setRankValue(int rankValue) {
+		this.rankValue = rankValue;
+	}
+	
+	/**
+	 * Sets both rank and the rank value for the progress bar
+	 */
+	public void setRank(String rank, int rankValue) {
+		this.rank = rank;
+		this.rankValue = rankValue;
+	}
+
+	/**
+	 * Returns true if the word is at least 4 letters long
+	 */
 	@Override
 	public boolean isCorrectWordLength(String word) {
-		if (word.length() < 4)
-		{
-			return false;
-		}
-		return true;
+		return word.length() >= 4;
 	}
-
+	
+	/**
+	 * Returns true if the center character is in the word
+	 */
 	@Override
 	public boolean containsCenterLetter(String word, char center) {
-		
-			return word.contains("" + center);
+		return word.contains("" + center); //use "" + center for one character String
 	}
-
+	
+	/**
+	 * TODO: Should be WordGenerator method
+	 */
 	@Override
 	public void createPangram(String[] listOfLetters) {
 		// TODO Auto-generated method stub
 		
 	}
-
+	
+	/**
+	 * Returns true if the word is a pangram
+	 */
 	@Override
 	public boolean isPangram(String word, String[] listOfLetters) {
 		
-	for (String letter: listOfLetters){
-		if (!word.contains(letter))
-		{
-			return false;}
+		/*
+		 * If length < 7, it is impossible for the word to be a pangram
+		 */
+		if (word.length()<7) {
+			return false;
+		}
+		/*
+		 * Go through each letter in the set of letters, return false if any letter is not present
+		 */
+		for (String letter: listOfLetters){
+			if (!word.contains(letter))
+			{
+				return false;
+			}
+		}
+		return true; //If every letter is in the word, we know the word is a pangram
 	}
-		return true;
-	}
+	
 	/*
 	 * Simple method to calculate the amount of points allotted for each word entered
 	 */
-	
 	public void calculatePoints(String word)
 	{
 		if (isCorrectWordLength(word))
 		{
 			List<String> wordList = wordGen.getDailyWordsAsList();
 			
+			/*
+			 * Make sure the word entered is in the daily word bank
+			 */
 			if (wordList.contains(word))
 			{
 				if (isPangram(word, listOfLetters))
 				{
-					points += 7;
+					points += 7; //pangrams are worth 7 extra points
 				}
+				//each word is worth points equal to the length of the word minus 3
 				points += word.length() -3;
 			}
 		}
+		this.progressBar(); //calculate the rank after updating the number of points
 	}
 	
 	/*
-	 * Calculates max amount of points based off of daily words list
+	 * Calculates the total amount of points possible today
 	 */
-	
 	public int maxPoints()
-	{ 
-		List<String> wordList = wordGen.getDailyWordsAsList();
-		int score = 0;
+	{
 		
+		List<String> wordList = wordGen.getDailyWordsAsList(); //get the daily word bank
+		int total = 0; //keep a local total variable to track the total points possible
+		
+		/*
+		 * Get the value of each of today's words and add it to the total
+		 */
 		for (String word : wordList)
 		{
 			if (isPangram(word, listOfLetters))
 			{
-				score +=7;
+				total += 7; //pangrams are worth 7 extra points
 			}
-			score += word.length() -3;
+			//each word is worth points equal to the length of the word minus 3
+			total += word.length() -3; 
 		}
 		
 		
-		return score;
+		return total; //return the total
 	}
 	
 	/*
 	 * Assigns rank based on percentage of maxPoints achieved
 	 */
-	
-	public void progressBar ()
+	public void progressBar()
 	{
-		int max = maxPoints();
-		if (points == max)
-		{
-			rank = "Queen Bee";
-		}
-	
-		else if (points >= max *.7)
-		{
-			rank = "Genius";
-		}
+		int max = maxPoints(); //get the max points possible for rank calculations
 		
-		else if (points >= max *.5)
+		/*
+		 * Determine the player's rank based on the percentage of the total points they have acquired
+		 */
+		if (points == max) //100% of points achieved (Hidden Rank)
 		{
-			rank = "Aamazing";
+			this.setRank("Queen Bee", 9);
 		}
-	
-		else if (points >= max*.4)
+		else if (points >= max *.7) //At least 70% of points achieved
 		{
-			rank = "Great";
+			this.setRank("Genius", 8);
 		}
-		
-		else if (points >= max *.25)
+		else if (points >= max *.5) //At least 50% of points achieved
 		{
-			rank = "Nice";
+			this.setRank("Aamazing", 7);
 		}
-	
-		else if (points >= max*.15)
+		else if (points >= max*.4) //At least 40% of points achieved
 		{
-			rank = "Solid";
+			this.setRank("Great", 6);
 		}
-	
-		else if (points >= max*.08)
+		else if (points >= max *.25) //At least 25% of points achieved
 		{
-			rank = "Good";
+			this.setRank("Nice", 5);
 		}
-		else if (points >= max*.05)
+		else if (points >= max*.15) //At least 15% of points achieved
 		{
-			rank = "Moving Up";
+			this.setRank("Solid", 4);
 		}
-		
-		else if (points >= max*.02)
+		else if (points >= max*.08) //At least 8% of points achieved
 		{
-			rank = "Good Start";
+			this.setRank("Good", 3);
 		}
-		
-		else {
-			rank = "Beeginner";
+		else if (points >= max*.05) //At least 5% of points achieved
+		{
+			this.setRank("Moving Up", 2);
+		}
+		else if (points >= max*.02) //At least 2% of points achieved
+		{
+			this.setRank("Good Start", 1);
+		}
+		else { //Default rank
+			this.setRank("Beginner", 0);
 		}
 	}
-	
-	
-	
 
 }
