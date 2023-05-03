@@ -82,7 +82,7 @@ public class TrieTest {
 		String[] strings = new String[100];
 		
 		for (int i = 0; i < strings.length; i++) {
-			strings[i] = Magic.generateRandomWordOfLength((int) (100*Math.random()));
+		//	strings[i] = Magic.generateRandomWordOfLength((int) (100*Math.random()));
 			tester.addWord(strings[i]);
 			System.out.println(strings[i]);
 		}
