@@ -1,5 +1,6 @@
 package com.CS380.SpellingBee;
 
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -8,9 +9,10 @@ import java.util.List;
 public class Game implements GameLogic {
 	private int points = 0; //tracks the number of points the player has
 	WordGenerator wordGen; //generates the words for the day
-	private String[] listOfLetters; //stores the list of letters in the game
+	private String[] listOfLetters; //stores the list of letters in the game ( 1st element is center)
 	private String rank = "Beginner"; //the rank the player has reached for the day
 	private int rankValue = 0; //a number to represent the rank (for progress bar in UI)
+	private LinkedList enteredWords;
 	
 	/**
 	 * Constructor
@@ -245,4 +247,12 @@ public class Game implements GameLogic {
 		}
 	}
 
+	public LinkedList getEnteredWords() {
+		return enteredWords;
+	}
+
+	public void addWordToEntered (String word)
+	{
+		enteredWords.add(word);
+	}
 }
