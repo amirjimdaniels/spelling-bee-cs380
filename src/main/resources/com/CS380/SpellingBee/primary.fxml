@@ -8,7 +8,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.CS380.SpellingBee.PrimaryController">
    <children>
-      <ListView fx:id="listView" layoutX="373.0" layoutY="90.0" prefHeight="262.0" prefWidth="200.0" />
+      <ListView fx:id="enteredWordsView" layoutX="373.0" layoutY="90.0" prefHeight="262.0" prefWidth="200.0" />
       <TextField fx:id="textField" layoutX="377.0" layoutY="42.0" prefHeight="26.0" prefWidth="193.0" />
       <Button fx:id="buttonTop" layoutX="143.0" layoutY="84.0" mnemonicParsing="false" onAction="#clickTopButton" prefHeight="57.0" prefWidth="63.0" styleClass="buttonHexagon" stylesheets="@SpellingBee.css" text="M" />
       <Button fx:id="buttonTopLeft" layoutX="92.0" layoutY="115.0" mnemonicParsing="false" onAction="#clickButtonTopLeft" prefHeight="57.0" prefWidth="63.0" styleClass="buttonHexagon" stylesheets="@SpellingBee.css" text="Y" />

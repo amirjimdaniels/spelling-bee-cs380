@@ -2,19 +2,32 @@ package com.CS380.SpellingBee;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.LinkedList;
 import java.util.ResourceBundle;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 
 public class PrimaryController implements Initializable {
 
 	String[] listOfLetters = {"M", "A", "H", "O", "G", "O", "N", "Y"};
-	Game gameInstance = new Game(listOfLetters, new WordGenerator(new TrieVisitor(new Trie())));
+	//Game gameInstance = new Game(listOfLetters, new WordGenerator(new TrieVisitor(new Trie())));
+	
+
+	//This is a data structure that allows for the listView to display objects
+	ObservableList<String> enteredWords = FXCollections.observableArrayList();
+	@FXML
+	ListView<String> enteredWordsView = new ListView<String>();
+
+
+	
 	@FXML
 	Button buttonTop;
 	@FXML
@@ -38,6 +51,7 @@ public class PrimaryController implements Initializable {
 	@FXML
 	Label enteredText = new Label("");
 	
+	
 
 	
     @FXML
@@ -47,7 +61,8 @@ public class PrimaryController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-
+		
+		enteredWordsView.setItems(enteredWords);
 	}
 	
 	
@@ -111,7 +126,8 @@ public class PrimaryController implements Initializable {
 	}
 	@FXML
 	public void clickEnterButton (ActionEvent Action)
-	{	gameInstance.addWordToEntered(enteredText.getText());
+	{	
+		enteredWords.add(enteredText.getText());
 		enteredText.setText("");
 		System.out.println("ClickedEnter");
 		
