@@ -2,7 +2,10 @@ package com.CS380.SpellingBee;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
@@ -17,7 +20,7 @@ import javafx.scene.control.ListView;
 
 public class PrimaryController implements Initializable {
 
-	String[] listOfLetters = {"M", "A", "H", "O", "G", "O", "N", "Y"};
+	String[] listOfLetters = {"M", "A", "H", "G", "O", "N", "Y"};
 	//Game gameInstance = new Game(listOfLetters, new WordGenerator(new TrieVisitor(new Trie())));
 	
 
@@ -136,6 +139,24 @@ public class PrimaryController implements Initializable {
 	@FXML
 	public void clickShuffleButton (ActionEvent Action)
 	{
+		List<String> lettersFromButton = new ArrayList<String>();
+		lettersFromButton.add(buttonBottom.getText());
+		lettersFromButton.add(buttonBottomLeft.getText());
+		lettersFromButton.add(buttonTopLeft.getText());
+		lettersFromButton.add(buttonTop.getText());
+		lettersFromButton.add(buttonTopRight.getText());
+		lettersFromButton.add(buttonBottomRight.getText());
+		
+		Collections.shuffle(lettersFromButton);
+		
+		buttonBottom.setText(lettersFromButton.get(0));
+		buttonBottomLeft.setText(lettersFromButton.get(1));
+		buttonTopLeft.setText(lettersFromButton.get(2));
+		buttonTop.setText(lettersFromButton.get(3));
+		buttonTopRight.setText(lettersFromButton.get(4));
+		buttonBottomRight.setText(lettersFromButton.get(5));
+
+		
 		System.out.println("ClickedShuffle");
 
 	}
